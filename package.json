@@ -1,0 +1,73 @@
+{
+  "name": "gtags-quickopen",
+  "displayName": "Gtags QuickOpen",
+  "description": "Quick file open using gtags (global -P)",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.56.0"
+  },
+  "icon": "icon.png",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gtags-quickopen.openFile",
+        "title": "Gtags: Open File"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "gtags-quickopen.openFile",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p",
+        "when": "editorTextFocus || !inputFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Gtags QuickOpen",
+      "properties": {
+        "gtags-quickopen.pinTab": {
+          "type": "boolean",
+          "default": false,
+          "description": "Always pin tabs when opening files (disable preview mode). / ファイルを開く際に常にタブを固定する（プレビューモードを無効化）"
+        },
+        "gtags-quickopen.maxItems": {
+          "type": "number",
+          "default": 50,
+          "minimum": 5,
+          "maximum": 1000,
+          "description": "Maximum number of files to display in the quick pick. / クイックピックに表示する最大ファイル数"
+        },
+        "gtags-quickopen.excludePatterns": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "File patterns to exclude from the list. Supports wildcards (* and **). Examples: '*.min.js', 'node_modules/**', 'dist/*'. / リストから除外するファイルパターン ワイルドカード（* と **）をサポート 例: '*.min.js', 'node_modules/**', 'dist/*'"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/vscode": "^1.105.0"
+  }
+}
